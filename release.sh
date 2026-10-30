@@ -36,7 +36,20 @@ rm -rf "${STAGING_DIR}" "${DMG_TMP}" "${DMG_FINAL}"
 echo 'Building.'
 # build the project
 
-xcodebuild -workspace BeardedSpice.xcworkspace -scheme BeardedSpice -configuration Release
+# SYMROOT keeps products in ./build (workspaces default to DerivedData).
+# ONLY_ACTIVE_ARCH=NO forces a Universal binary (x86_64 + arm64).
+xcodebuild -workspace BeardedSpice.xcworkspace -scheme BeardedSpice -configuration Release \
+  SYMROOT="${CWD}/build" ONLY_ACTIVE_ARCH=NO
+
+echo 'Checking architectures.'
+ARCHS_BUILT=`lipo -archs "${BUILD_DIR}/${APP_EXE}"`
+echo "  ${APP_EXE}: ${ARCHS_BUILT}"
+for arch in x86_64 arm64; do
+  if [[ " ${ARCHS_BUILT} " != *" ${arch} "* ]]; then
+    echo "Missing ${arch} slice, aborting." >&2
+    exit 1
+  fi
+done
 
 echo 'Copying to staging directory.'
 # copy over the stuff we want in the final disk image to our staging dir

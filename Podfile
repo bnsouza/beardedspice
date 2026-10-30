@@ -1,4 +1,4 @@
-platform :osx, '10.10'
+platform :osx, '10.13'
 project 'BeardedSpice'
 
 source 'https://github.com/CocoaPods/Specs.git'
@@ -19,3 +19,12 @@ target 'BeardedSpiceControllers' do
     end
 end
 
+# Pods ship with ancient deployment targets (10.6+) that modern Xcode no longer
+# supports (missing libarclite, warnings on arm64). Align them with the app.
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.13'
+        end
+    end
+end

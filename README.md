@@ -25,7 +25,7 @@ We've got you covered, give the [Shortcuts section](#keyboard-shortcuts) a look 
 
 Ready to give BeardedSpice a spin? You can download the [latest release here](https://raw.github.com/beardedspice/beardedspice/distr/publish/releases/BeardedSpice-latest.zip)*, or find a full list of all our [previously released binaries here](https://github.com/beardedspice/beardedspice/releases).
 
-*Mac OS X 10.10 or greater required.
+*macOS 10.13 or greater required. Native on both Intel and Apple Silicon Macs.
 
 If you're using Safari (≥9.1.1), you should enable developer preference. [See detailed guide how to do it.](https://github.com/beardedspice/beardedspice/wiki/Wont-Work-issue-after-Safari-Update-(9.1.1-and-later))
 
